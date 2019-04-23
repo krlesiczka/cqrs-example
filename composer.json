@@ -1,0 +1,30 @@
+{
+    "name": "krlesiczka-pgs/cqrs-demo",
+    "description": "Demo of CQRS for PHP workshop",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Krzysztof Lesiczka",
+            "email": "krlesiczka@pgs-bin.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CqrsExample\\": "src/CqrsExample/",
+            "CommonLibrary\\": "src/CommonLibrary/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "require": {
+        "ramsey/uuid": "3.8.0",
+        "league/tactician": "^1.0",
+        "league/container": "^3.2",
+        "league/tactician-container": "^2.0"
+    },
+    "require-dev": {
+        "behat/behat": "^3.5",
+        "mockery/mockery": "^1.2"
+    }
+}
