@@ -26,7 +26,7 @@ class PdoRepository
     protected function query(string $sql, array $params = []): array
     {
         $statement = $this->connection->prepare($sql);
-        $statement->execute($params);
+        $statement->execute(count($params) > 0 ? $params : null);
         return $statement->fetchAll(PDOAlias::FETCH_ASSOC);
     }
 }

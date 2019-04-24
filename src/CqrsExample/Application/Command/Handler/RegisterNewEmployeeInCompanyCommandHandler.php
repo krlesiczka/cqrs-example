@@ -6,9 +6,9 @@ namespace CqrsExample\Application\Command\Handler;
 use CommonLibrary\Application\Command\CommandHandler;
 use CommonLibrary\Domain\EventPublisher;
 use CqrsExample\Application\Command\RegisterNewEmployeeInCompanyCommand;
+use CqrsExample\Application\Event\NewEmployeeRegisteredInCompanyEvent;
 use CqrsExample\Domain\Company\CompanyRepository;
 use CqrsExample\Domain\Employee\EmployeeRepository;
-use CqrsExample\Domain\Event\NewEmployeeRegisteredInCompanyEvent;
 
 class RegisterNewEmployeeInCompanyCommandHandler implements CommandHandler
 {
@@ -43,7 +43,7 @@ class RegisterNewEmployeeInCompanyCommandHandler implements CommandHandler
         $this->eventPublisher = $eventPublisher;
     }
 
-    public function __invoke(RegisterNewEmployeeInCompanyCommand $command): void
+    public function handle(RegisterNewEmployeeInCompanyCommand $command): void
     {
         $company = $this->companyRepository->get($command->getCompanyId());
         $newEmployee = $command->getEmployee();

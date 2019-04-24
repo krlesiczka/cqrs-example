@@ -10,7 +10,7 @@ use CqrsExample\Domain\Company\CompanyId;
 use CqrsExample\Domain\Company\CompanyFactory;
 use CqrsExample\Domain\Company\CompanyRepository;
 use CqrsExample\Domain\Employee\EmployeeRepository;
-use PDO;
+use PDO as PDOAlias;
 
 class PdoCompanyRepository extends PdoRepository implements CompanyRepository
 {
@@ -21,10 +21,10 @@ class PdoCompanyRepository extends PdoRepository implements CompanyRepository
 
     /**
      * PdoCompanyRepository constructor.
-     * @param PDO $connection
+     * @param PDOAlias $connection
      * @param EmployeeRepository $employees
      */
-    public function __construct(PDO $connection, EmployeeRepository $employees)
+    public function __construct(PDOAlias $connection, EmployeeRepository $employees)
     {
         parent::__construct($connection);
         $this->employees = $employees;

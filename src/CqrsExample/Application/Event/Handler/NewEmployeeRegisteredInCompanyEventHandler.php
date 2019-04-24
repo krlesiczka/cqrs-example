@@ -4,6 +4,7 @@
 namespace CqrsExample\Application\Event\Handler;
 
 use CqrsExample\Application\Command\SendAfterEmployeeRegistrationNotificationsCommand;
+use CqrsExample\Application\Command\UpdateCompanyReadModels;
 use CqrsExample\Application\Event\NewEmployeeRegisteredInCompanyEvent;
 use League\Tactician\CommandBus;
 
@@ -23,7 +24,7 @@ class NewEmployeeRegisteredInCompanyEventHandler
         $this->commandBus = $commandBus;
     }
 
-    public function __invoke(NewEmployeeRegisteredInCompanyEvent $event): void
+    public function handle(NewEmployeeRegisteredInCompanyEvent $event): void
     {
         $notifications = new SendAfterEmployeeRegistrationNotificationsCommand(
             $event->getCompany()->getId(),
@@ -32,6 +33,6 @@ class NewEmployeeRegisteredInCompanyEventHandler
         );
         $this->commandBus->handle($notifications);
 
-        //TODO read model refresh
+        $this->commandBus->handle(new UpdateCompanyReadModels($event->getCompany()));
     }
 }

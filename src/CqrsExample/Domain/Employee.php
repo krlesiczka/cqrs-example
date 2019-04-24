@@ -25,6 +25,11 @@ class Employee
     private $phone;
 
     /**
+     * @var Company
+     */
+    private $company;
+
+    /**
      * Employee constructor.
      * @param EmployeeEmail $email
      * @param EmployeeName $name
@@ -55,6 +60,14 @@ class Employee
     }
 
     /**
+     * @param Company $company
+     */
+    public function assignCompany(Company $company): void
+    {
+        $this->company = $company;
+    }
+
+    /**
      * @return EmployeeEmail
      */
     public function getEmail(): EmployeeEmail
@@ -76,5 +89,13 @@ class Employee
     public function getPhone(): ?EmployeePhoneNumber
     {
         return $this->phone;
+    }
+
+    /**
+     * @return Company
+     */
+    public function getCompany(): Company
+    {
+        return $this->company;
     }
 }

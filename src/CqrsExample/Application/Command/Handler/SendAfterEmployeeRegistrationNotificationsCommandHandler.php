@@ -1,12 +1,12 @@
 <?php
 
-namespace CqrsExample\Application\Command;
-
+namespace CqrsExample\Application\Command\Handler;
 
 use CommonLibrary\Application\Command\CommandHandler;
 use CommonLibrary\Application\Context\EventSourceEnv;
 use CommonLibrary\EmailSender;
 use CommonLibrary\SmsSender;
+use CqrsExample\Application\Command\SendAfterEmployeeRegistrationNotificationsCommand;
 use CqrsExample\Domain\Company\CompanyRepository;
 use CqrsExample\Domain\Employee\EmployeeRepository;
 
@@ -52,7 +52,7 @@ class SendAfterEmployeeRegistrationNotificationsCommandHandler implements Comman
     }
 
 
-    public function __invoke(SendAfterEmployeeRegistrationNotificationsCommand $command): void
+    public function handle(SendAfterEmployeeRegistrationNotificationsCommand $command): void
     {
         $eventContext = $command->getContext();
         if ($eventContext->getEventSourceEnv() !== EventSourceEnv::CLI) {

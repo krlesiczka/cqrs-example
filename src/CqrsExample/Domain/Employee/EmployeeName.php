@@ -28,10 +28,10 @@ class EmployeeName
     private static function validate(string $name): void
     {
         $name = trim($name);
-        if ($name) {
+        if (empty($name)) {
             throw new EmployeeNameInvalidFormatException('Employee name can not be empty');
         }
-        if (ucfirst($name) === $name) {
+        if (ucfirst($name) !== $name) {
             throw new EmployeeNameInvalidFormatException('Employee name has to have big first letter');
         }
     }

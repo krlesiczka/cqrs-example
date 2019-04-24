@@ -3,9 +3,13 @@
 namespace CommonLibrary\Infrastructure;
 
 use CqrsExample\Application\Command\Handler\RegisterNewEmployeeInCompanyCommandHandler;
+use CqrsExample\Application\Command\Handler\SendAfterEmployeeRegistrationNotificationsCommandHandler;
 use CqrsExample\Application\Command\RegisterNewEmployeeInCompanyCommand;
 use CqrsExample\Application\Command\SendAfterEmployeeRegistrationNotificationsCommand;
-use CqrsExample\Application\Command\SendAfterEmployeeRegistrationNotificationsCommandHandler;
+use CqrsExample\Application\Command\UpdateCompanyReadModels;
+use CqrsExample\Application\Event\Handler\NewEmployeeRegisteredInCompanyEventHandler;
+use CqrsExample\Application\Event\NewEmployeeRegisteredInCompanyEvent;
+use CqrsExample\Infrastructure\Database\PdoCompanyReadModelUpdate;
 use League\Container\Container;
 use League\Tactician\CommandBus;
 use League\Tactician\Container\ContainerLocator;
@@ -31,6 +35,11 @@ class Bus
             $commandToHandlerMap = [
                 RegisterNewEmployeeInCompanyCommand::class => RegisterNewEmployeeInCompanyCommandHandler::class,
                 SendAfterEmployeeRegistrationNotificationsCommand::class => SendAfterEmployeeRegistrationNotificationsCommandHandler::class,
+
+                //TODO implement event handler
+                NewEmployeeRegisteredInCompanyEvent::class => NewEmployeeRegisteredInCompanyEventHandler::class,
+
+                UpdateCompanyReadModels::class => PdoCompanyReadModelUpdate::class,
             ];
             /** @var Container $dependencyContainer */
             $dependencyContainer = DependencyContainer::get();

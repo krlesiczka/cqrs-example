@@ -28,10 +28,10 @@ class CompanyName
     private static function validate(string $name): void
     {
         $name = trim($name);
-        if ($name) {
+        if (empty($name)) {
             throw new CompanyNameInvalidFormatException('Company name can not be empty');
         }
-        if (strtoupper($name) === $name) {
+        if (strtoupper($name) !== $name) {
             throw new CompanyNameInvalidFormatException('Company name has to be uppercase');
         }
     }

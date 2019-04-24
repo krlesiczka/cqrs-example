@@ -3,7 +3,7 @@
 /.idea/
 
 #project
-/bin/
+/bin/behat
 /vendor/
 /composer.lock
 

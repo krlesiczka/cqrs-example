@@ -54,6 +54,10 @@ class Company
         $this->domain = $domain;
         $this->employees = $employees;
 
+        foreach ($this->employees as $employee) {
+            $employee->assignCompany($this);
+        }
+
         $this->registration = $registration;
         $this->registration->setEmployeesList($this->employees);
     }
@@ -64,6 +68,7 @@ class Company
             throw new \LogicException('Can not register user with email not in company domain '.$this->domain);
         }
         $this->registration->checkEmployeeWithList($employee);
+        $employee->assignCompany($this);
         $this->employees[] = $employee;
     }
 

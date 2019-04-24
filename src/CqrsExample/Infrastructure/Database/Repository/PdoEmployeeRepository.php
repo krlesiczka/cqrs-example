@@ -33,7 +33,7 @@ class PdoEmployeeRepository extends PdoRepository implements EmployeeRepository
      */
     public function getCompanyEmployees(CompanyId $companyId): array
     {
-        $result = $this->query('SELECT * FROM employees WHERE company_id = :id', [':id' => (string)$companyId]);
+        $result = $this->query('SELECT * FROM employees WHERE companyId = :id', [':id' => (string)$companyId]);
         $employees = [];
         foreach ($result as $employee) {
             $employees[] = $this->createEmployee($employee['email'], $employee['name'], $employee['phone']);
@@ -45,16 +45,17 @@ class PdoEmployeeRepository extends PdoRepository implements EmployeeRepository
     public function persist(Employee $employee): void
     {
         $result = $this->query(
-            'INSERT OR REPLACE INTO employees (email, name, phone) VALUES (:email, :name, :phone);',
+            'INSERT OR REPLACE INTO employees (email, name, phone, companyId) VALUES (:email, :name, :phone, :companyId);',
             [
                 ':email' => (string)$employee->getEmail(),
                 ':name' => (string)$employee->getName(),
                 ':phone' => (string)$employee->getPhone(),
+                ':companyId' => (string)$employee->getCompany()->getId()
             ]
         );
     }
 
-    private function createEmployee(string $name, string $email, ?string $phone): Employee
+    private function createEmployee(string $email, string $name, ?string $phone): Employee
     {
         return new Employee(
             new EmployeeEmail($email),
