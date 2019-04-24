@@ -30,8 +30,11 @@ class Employee
      * @param EmployeeName $name
      * @param EmployeePhoneNumber $phone
      */
-    public function __construct(EmployeeEmail $email, EmployeeName $name, ?EmployeePhoneNumber $phone = null)
-    {
+    public function __construct(
+        EmployeeEmail $email,
+        EmployeeName $name,
+        ?EmployeePhoneNumber $phone = null
+    ) {
         $this->email = $email;
         $this->name = $name;
         $this->phone = $phone;

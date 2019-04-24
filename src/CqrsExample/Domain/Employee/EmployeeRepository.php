@@ -21,9 +21,11 @@ interface EmployeeRepository
      *
      * @return Employee[]
      */
-    public function getCompanyUsers(CompanyId $companyId): array;
+    public function getCompanyEmployees(CompanyId $companyId): array;
 
 
-
+    /**
+     * @param Employee $employee
+     */
     public function persist(Employee $employee): void;
 }

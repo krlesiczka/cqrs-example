@@ -11,6 +11,7 @@ use CqrsExample\Domain\Company\CompanyDomain;
 use CqrsExample\Domain\Company\CompanyId;
 use CqrsExample\Domain\Company\CompanyName;
 use CqrsExample\Domain\Company\CompanyRepository;
+use CqrsExample\Domain\Company\EmployeeRegistration\UniqueEmployeeCountRegistration;
 use CqrsExample\Domain\Employee;
 use CqrsExample\Domain\Employee\EmployeeEmail;
 use CqrsExample\Domain\Employee\EmployeeName;
@@ -121,7 +122,9 @@ class FeatureContext implements Context
         return new Company(
             new CompanyId($id ?? 'cb3388f5-9cd9-43c8-a4a3-16f70aa8ab22'),
             new CompanyName($name ?? 'TEST COMPANY'),
-            new CompanyDomain($domain ?? 'test.domain')
+            new CompanyDomain($domain ?? 'test.domain'),
+            [],
+            new UniqueEmployeeCountRegistration()
         );
     }
 }

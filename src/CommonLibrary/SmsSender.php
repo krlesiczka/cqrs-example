@@ -8,5 +8,5 @@ use CqrsExample\Domain\Employee\EmployeePhoneNumber;
 
 interface SmsSender
 {
-    public function sendWelcomeEmail(EmployeePhoneNumber $phoneNumber, EmployeeName $employeeName, CompanyName $companyName): void;
+    public function sendWelcomeSms(EmployeePhoneNumber $phoneNumber, EmployeeName $employeeName, CompanyName $companyName): void;
 }

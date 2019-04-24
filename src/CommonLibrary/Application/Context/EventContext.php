@@ -1,7 +1,7 @@
 <?php
-namespace CommonLibrary\Context;
+namespace CommonLibrary\Application\Context;
 
-use CommonLibrary\Context;
+use CommonLibrary\Application\Context;
 
 interface EventContext extends Context
 {

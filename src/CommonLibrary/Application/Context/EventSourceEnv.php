@@ -1,5 +1,5 @@
 <?php
-namespace CommonLibrary\Context;
+namespace CommonLibrary\Application\Context;
 
 
 class EventSourceEnv
@@ -21,6 +21,7 @@ class EventSourceEnv
 
     /**
      * EventSourceEnv constructor.
+     *
      * @param string $env
      */
     public function __construct(string $env)

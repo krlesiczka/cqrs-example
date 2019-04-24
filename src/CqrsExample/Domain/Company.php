@@ -5,6 +5,7 @@ namespace CqrsExample\Domain;
 use CqrsExample\Domain\Company\CompanyDomain;
 use CqrsExample\Domain\Company\CompanyId;
 use CqrsExample\Domain\Company\CompanyName;
+use CqrsExample\Domain\Company\EmployeeRegistration;
 
 class Company
 {
@@ -29,46 +30,41 @@ class Company
     private $employees;
 
     /**
+     * @var EmployeeRegistration
+     */
+    private $registration;
+
+    /**
      * Company constructor.
      * @param CompanyId $id
      * @param CompanyName $name
      * @param CompanyDomain $domain
+     * @param array $employees
+     * @param EmployeeRegistration $registration
      */
-    public function __construct(CompanyId $id, CompanyName $name, CompanyDomain $domain)
-    {
+    public function __construct(
+        CompanyId $id,
+        CompanyName $name,
+        CompanyDomain $domain,
+        array $employees,
+        EmployeeRegistration $registration
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->domain = $domain;
+        $this->employees = $employees;
+
+        $this->registration = $registration;
+        $this->registration->setEmployeesList($this->employees);
     }
 
     public function registerNewEmployee(Employee $employee): void
     {
-        //TODO exceptions
         if (!$employee->hasEmailInCompanyDomain($this->domain)) {
             throw new \LogicException('Can not register user with email not in company domain '.$this->domain);
         }
-        if ($this->employeesListIsFull()) {
-            throw new \LogicException('Can not register because company employees list is full');
-        }
-        if ($this->employeeIsOnList($employee)) {
-            throw new \LogicException('Can not register because employees is already registered');
-        }
+        $this->registration->checkEmployeeWithList($employee);
         $this->employees[] = $employee;
-    }
-
-    private function employeeIsOnList(Employee $checkedEmployee): bool
-    {
-        foreach ($this->employees as $employee) {
-            if ($employee->equals($checkedEmployee)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private function employeesListIsFull(): bool
-    {
-        return count($this->employees) >= 10;
     }
 
     /**
@@ -93,5 +89,13 @@ class Company
     public function getDomain(): CompanyDomain
     {
         return $this->domain;
+    }
+
+    /**
+     * @return Employee[]
+     */
+    public function getEmployees(): array
+    {
+        return $this->employees;
     }
 }

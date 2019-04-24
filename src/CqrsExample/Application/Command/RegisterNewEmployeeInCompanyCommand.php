@@ -2,7 +2,7 @@
 
 namespace CqrsExample\Application\Command;
 
-use CommonLibrary\Command;
+use CommonLibrary\Application\Command;
 use CqrsExample\Domain\Company\CompanyId;
 use CqrsExample\Domain\Employee;
 

@@ -3,14 +3,14 @@
 namespace CqrsExample\Application\Command;
 
 
-use CommonLibrary\Command;
+use CommonLibrary\Application\Command\CommandHandler;
 use CommonLibrary\Context\EventSourceEnv;
 use CommonLibrary\EmailSender;
 use CommonLibrary\SmsSender;
 use CqrsExample\Domain\Company\CompanyRepository;
 use CqrsExample\Domain\Employee\EmployeeRepository;
 
-class SendAfterEmployeeRegistrationNotificationsCommandHandler implements Command\CommandHandler
+class SendAfterEmployeeRegistrationNotificationsCommandHandler implements CommandHandler
 {
     /**
      * @var CompanyRepository

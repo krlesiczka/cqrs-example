@@ -3,7 +3,7 @@
 namespace CqrsExample\Application\Command;
 
 
-use CommonLibrary\Command;
+use CommonLibrary\Application\Command;
 use CommonLibrary\Context\EventContext;
 use CqrsExample\Domain\Company\CompanyId;
 use CqrsExample\Domain\Employee\EmployeeEmail;

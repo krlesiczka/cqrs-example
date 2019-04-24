@@ -3,7 +3,7 @@
 namespace CqrsExample\Application\Command\Handler;
 
 
-use CommonLibrary\Command\CommandHandler;
+use CommonLibrary\Application\Command\CommandHandler;
 use CommonLibrary\Domain\EventPublisher;
 use CqrsExample\Application\Command\RegisterNewEmployeeInCompanyCommand;
 use CqrsExample\Domain\Company\CompanyRepository;
