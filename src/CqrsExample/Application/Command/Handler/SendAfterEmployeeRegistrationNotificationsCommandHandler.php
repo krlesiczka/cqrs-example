@@ -4,7 +4,7 @@ namespace CqrsExample\Application\Command;
 
 
 use CommonLibrary\Application\Command\CommandHandler;
-use CommonLibrary\Context\EventSourceEnv;
+use CommonLibrary\Application\Context\EventSourceEnv;
 use CommonLibrary\EmailSender;
 use CommonLibrary\SmsSender;
 use CqrsExample\Domain\Company\CompanyRepository;
@@ -55,7 +55,7 @@ class SendAfterEmployeeRegistrationNotificationsCommandHandler implements Comman
     public function __invoke(SendAfterEmployeeRegistrationNotificationsCommand $command): void
     {
         $eventContext = $command->getContext();
-        if ($eventContext->getEventSourceEnv() === EventSourceEnv::CLI) {
+        if ($eventContext->getEventSourceEnv() !== EventSourceEnv::CLI) {
             return;
         }
 
@@ -69,7 +69,7 @@ class SendAfterEmployeeRegistrationNotificationsCommandHandler implements Comman
         );
 
         if (null !== $employee->getPhone()) {
-            $this->smsSender->sendWelcomeEmail(
+            $this->smsSender->sendWelcomeSms(
                 $employee->getPhone(),
                 $employee->getName(),
                 $company->getName()

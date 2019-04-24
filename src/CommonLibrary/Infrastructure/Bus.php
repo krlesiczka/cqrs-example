@@ -6,6 +6,7 @@ use CqrsExample\Application\Command\Handler\RegisterNewEmployeeInCompanyCommandH
 use CqrsExample\Application\Command\RegisterNewEmployeeInCompanyCommand;
 use CqrsExample\Application\Command\SendAfterEmployeeRegistrationNotificationsCommand;
 use CqrsExample\Application\Command\SendAfterEmployeeRegistrationNotificationsCommandHandler;
+use League\Container\Container;
 use League\Tactician\CommandBus;
 use League\Tactician\Container\ContainerLocator;
 use League\Tactician\Handler\CommandHandlerMiddleware;
@@ -31,9 +32,11 @@ class Bus
                 RegisterNewEmployeeInCompanyCommand::class => RegisterNewEmployeeInCompanyCommandHandler::class,
                 SendAfterEmployeeRegistrationNotificationsCommand::class => SendAfterEmployeeRegistrationNotificationsCommandHandler::class,
             ];
+            /** @var Container $dependencyContainer */
+            $dependencyContainer = DependencyContainer::get();
 
             $containerLocator = new ContainerLocator(
-                DependencyContainer::get(),
+                $dependencyContainer,
                 $commandToHandlerMap
             );
 
@@ -48,6 +51,8 @@ class Bus
                     $commandHandlerMiddleware,
                 ]
             );
+
+            $dependencyContainer->add(CommandBus::class, $commandBus, true);
 
             self::$bus = $commandBus;
         }

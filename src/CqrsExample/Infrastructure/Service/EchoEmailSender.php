@@ -14,6 +14,6 @@ class EchoEmailSender implements EmailSender
 
     public function sendWelcomeEmail(EmployeeEmail $employeeEmail, EmployeeName $employeeName, CompanyName $companyName): void
     {
-        echo "E-mail to {$employeeEmail}: Dear {$employeeName} welcome in {$companyName} company";
+        echo "E-mail to {$employeeEmail}: Dear {$employeeName} welcome in {$companyName} company\n";
     }
 }

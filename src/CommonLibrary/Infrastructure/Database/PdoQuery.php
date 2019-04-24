@@ -6,7 +6,7 @@ namespace CommonLibrary\Infrastructure\Database;
 
 use PDO as PDOAlias;
 
-class PdoRepository
+class PdoQuery
 {
     /**
      * @var PDOAlias
@@ -23,10 +23,10 @@ class PdoRepository
         $this->connection = $connection;
     }
 
-    protected function query(string $sql, array $params = []): array
+    protected function query(string $sql, array $params, string $outputClass): array
     {
         $statement = $this->connection->prepare($sql);
         $statement->execute($params);
-        return $statement->fetchAll(PDOAlias::FETCH_ASSOC);
+        return $statement->fetchAll(PDOAlias::FETCH_CLASS, $outputClass);
     }
 }

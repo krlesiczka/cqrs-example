@@ -12,4 +12,9 @@ interface CompanyQueries
      * @return CompanyDto
      */
     public function get(string $id): CompanyDto;
+
+    /**
+     * @return CompanyDto[]
+     */
+    public function getAll(): array;
 }

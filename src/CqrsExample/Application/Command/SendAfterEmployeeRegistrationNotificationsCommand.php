@@ -4,7 +4,7 @@ namespace CqrsExample\Application\Command;
 
 
 use CommonLibrary\Application\Command;
-use CommonLibrary\Context\EventContext;
+use CommonLibrary\Application\Context\EventContext;
 use CqrsExample\Domain\Company\CompanyId;
 use CqrsExample\Domain\Employee\EmployeeEmail;
 

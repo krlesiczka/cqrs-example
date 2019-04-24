@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CqrsExample\Infrastructure\Database;
+namespace CqrsExample\Infrastructure\Database\Repository;
 
 
 use CommonLibrary\Infrastructure\Database\PdoRepository;
@@ -37,9 +37,10 @@ class PdoCompanyRepository extends PdoRepository implements CompanyRepository
      */
     public function get(CompanyId $companyId): Company
     {
-        $r = $this->query('SELECT * FROM companies WHERE id = :id', [':id' => (string)$companyId]);
+        $result = $this->query('SELECT * FROM companies WHERE id = :id', [':id' => (string)$companyId]);
+        $company = array_shift($result);
         $employees = $this->employees->getCompanyEmployees($companyId);
-        return CompanyFactory::createFromData($r['id'], $r['name'], $r['domain'], $employees);
+        return CompanyFactory::createFromData($company['id'], $company['name'], $company['domain'], $employees);
     }
 
     public function persist(Company $company): void

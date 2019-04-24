@@ -1,7 +1,6 @@
 <?php
 
-
-namespace CqrsExample\Infrastructure\Database;
+namespace CqrsExample\Infrastructure\Database\Repository;
 
 
 use CommonLibrary\Infrastructure\Database\PdoRepository;
@@ -22,9 +21,9 @@ class PdoEmployeeRepository extends PdoRepository implements EmployeeRepository
      */
     public function get(EmployeeEmail $employeeEmail): Employee
     {
-        $r = $this->query('SELECT * FROM employees WHERE email = :email', [':email' => (string)$employeeEmail]);
-
-        return $this->createEmployee($r['email'], $r['name'], $r['phone']);
+        $result = $this->query('SELECT * FROM employees WHERE email = :email', [':email' => (string)$employeeEmail]);
+        $employee = array_shift($result);
+        return $this->createEmployee($employee['email'], $employee['name'], $employee['phone']);
     }
 
     /**
@@ -35,10 +34,9 @@ class PdoEmployeeRepository extends PdoRepository implements EmployeeRepository
     public function getCompanyEmployees(CompanyId $companyId): array
     {
         $result = $this->query('SELECT * FROM employees WHERE company_id = :id', [':id' => (string)$companyId]);
-
         $employees = [];
-        foreach ($result as $r) {
-            $employees[] = $this->createEmployee($r['email'], $r['name'], $r['phone']);
+        foreach ($result as $employee) {
+            $employees[] = $this->createEmployee($employee['email'], $employee['name'], $employee['phone']);
         }
 
         return $employees;

@@ -22,7 +22,8 @@
         "league/tactician": "^1.0",
         "league/container": "^3.2",
         "league/tactician-container": "^2.0",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "behat/behat": "^3.5",

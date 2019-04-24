@@ -29,6 +29,15 @@ class EventSourceEnv
         $this->env = $env;
     }
 
+    public static function fromSapi(): self
+    {
+        if (PHP_SAPI === 'cli') {
+            return new self(self::CLI);
+        }
+        return new self(self::APP);
+    }
+
+
     /**
      * @return string
      */
